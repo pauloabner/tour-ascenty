@@ -6,10 +6,27 @@
     <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
     <script>
       // Componente para mostrar/esconder o popup
-      AFRAME.registerComponent('hotspot-interaction', {
+      AFRAME.registerComponent('hotspot-interaction-1', {
         init: function () {
           var el = this.el;
-          var popup = document.querySelector('#popup-info');
+          var popup = document.querySelector('#popup-info-1');
+
+          el.addEventListener('mouseenter', function () {
+            popup.setAttribute('visible', 'true');
+            el.setAttribute('color', '#00FF00'); // Muda cor do ponto ao focar
+          });
+
+          el.addEventListener('mouseleave', function () {
+            popup.setAttribute('visible', 'false');
+            el.setAttribute('color', '#FF0000');
+          });
+        }
+      });
+
+      AFRAME.registerComponent('hotspot-interaction-2', {
+        init: function () {
+          var el = this.el;
+          var popup = document.querySelector('#popup-info-2');
 
           el.addEventListener('mouseenter', function () {
             popup.setAttribute('visible', 'true');
@@ -35,7 +52,15 @@
       <a-entity camera look-controls position="0 1.6 0">
         <a-cursor fuse="true" fuse-timeout="500" color="#FFF"></a-cursor>
         
-        <a-plane id="popup-info" 
+        <a-plane id="popup-info-1" 
+                 position="0 0 -1" 
+                 width="0.8" height="0.4" 
+                 color="#000" 
+                 opacity="0.8" 
+                 visible="false"
+                 text="value: Servidor Rack 04\nStatus: Online\nTemperatura: 18C; align: center; color: #FFF">
+        </a-plane>
+        <a-plane id="popup-info-2" 
                  position="0 0 -1" 
                  width="0.8" height="0.4" 
                  color="#000" 
@@ -45,11 +70,17 @@
         </a-plane>
       </a-entity>
 
-      <a-sphere id="ponto-interesse" 
+      <a-sphere id="ponto-interesse-1" 
                 position="2 1.5 -3" 
                 radius="0.1" 
                 color="#FF0000" 
                 hotspot-interaction>
+      </a-sphere>
+
+      <a-sphere id="ponto-interesse-2" 
+                position="-0.38125 2.87486 -3.6646" 
+                radius="0.1" color="#FF0000" 
+                hotspot-interaction="">
       </a-sphere>
 
     </a-scene>
