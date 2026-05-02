@@ -73,10 +73,46 @@
     <a-entity position="0 0 0" rotation="0 180 0">
       <a-entity camera="far: 100; fov: 45" look-controls position="0 0 0">
         <a-cursor color="#FFF" raycaster="objects: .raycastable"></a-cursor>
-        <a-plane id="popup-info-1" position="0.4 -0.25 -1" width="0.5" height="0.25" color="#000" opacity="0.8"
-          visible="false" text="value: Servidor Rack 01\nStatus: Online\nTemperatura: 18C; align: center; color: #FFF">
-
+        <!-- Popup 1 -->
+        <a-plane id="popup-info-1" position="0 -0.35 -1" width="0.7" height="0.20" color="#000" opacity="0.4"
+          visible="false">
+          <!-- Linha 1 -->
+          <a-entity position="-0.16 0.05 0.01">
+            <a-text value="6" color="#ef5123" align="right" position="-0.05 0 0" width="1.2"></a-text>
+            <a-text value="Computing Servers" color="#FFF" align="left" position="-0.02 0 0" width="0.75"></a-text>
+          </a-entity>
+          <!-- Linha 2 -->
+          <a-entity position="-0.16 0 0.01">
+            <a-text value="288" color="#213d93" align="right" position="-0.05 0 0" width="1.2"></a-text>
+            <a-text value="Processing Cores" color="#FFF" align="left" position="-0.02 0 0" width="0.75"></a-text>
+          </a-entity>
+          <!-- Linha 3 -->
+          <a-entity position="-0.16 -0.05 0.01">
+            <a-text value="15" color="#ef5123" align="right" position="-0.05 0 0" width="1.2"></a-text>
+            <a-text value="High-performance GPUs" color="#FFF" align="left" position="-0.02 0 0" width="0.75"></a-text>
+          </a-entity>
         </a-plane>
+
+        <!-- Popup 2 -->
+        <a-plane id="popup-info-2" position="0 -0.35 -1" width="0.7" height="0.20" color="#000" opacity="0.4"
+          visible="false">
+          <!-- Linha 1 -->
+          <a-entity position="-0.16 0.05 0.01">
+            <a-text value="+3.5" color="#213d93" align="right" position="-0.05 0 0" width="1.2"></a-text>
+            <a-text value="TB RAM Memory" color="#FFF" align="left" position="-0.02 0 0" width="0.75"></a-text>
+          </a-entity>
+          <!-- Linha 2 -->
+          <a-entity position="-0.16 0 0.01">
+            <a-text value="3" color="#ef5123" align="right" position="-0.05 0 0" width="1.2"></a-text>
+            <a-text value="Storage Servers" color="#FFF" align="left" position="-0.02 0 0" width="0.75"></a-text>
+          </a-entity>
+          <!-- Linha 3 -->
+          <a-entity position="-0.16 -0.05 0.01">
+            <a-text value="+933" color="#213d93" align="right" position="-0.05 0 0" width="1.2"></a-text>
+            <a-text value="TB Dedicated Storage" color="#FFF" align="left" position="-0.02 0 0" width="0.75"></a-text>
+          </a-entity>
+        </a-plane>
+
       </a-entity>
       <a-entity id="ambient-sound-entity"
         sound="src: #ambient-noise; autoplay: true; loop: true; volume: 0.5"></a-entity>
@@ -86,16 +122,13 @@
       scale="16.902 35 1">
     </a-plane>
     <a-plane id="area-rack-2" class="raycastable" position="-16.64264 -14.02423 20" rotation="" width="1" height="2"
-      material="opacity: 0; side: double; transparent: true; color: #FF0000" rack-area="popup: #popup-info-1"
+      material="opacity: 0; side: double; transparent: true; color: #FF0000" rack-area="popup: #popup-info-2"
       scale="15 31.17992 1">
     </a-plane>
     <a-plane id="area-rack-3" class="raycastable" position="94.60247 4.36274 -5.19149" rotation="0 90 0" width="1"
       height="2" material="opacity: 0.01; side: double; transparent: true; color: #FF0000"
-      rack-area="popup: #popup-info-1" scale="43.20385 15 1">
+      rack-area="popup: #popup-info-3" scale="43.20385 15 1">
     </a-plane>
-    <a-sphere id="ponto-interesse-1" class="raycastable" position="2 1.5 -3" radius="0.1" color="#FF0000"
-      hotspot-interaction-1>
-    </a-sphere>
 
   </a-scene>
 </body>
