@@ -42,6 +42,17 @@
         });
       }
     });
+
+    window.addEventListener('click', function () {
+      var sceneEl = document.querySelector('a-scene');
+
+      // Verifica se o contexto de áudio do Three.js (que o A-Frame usa) está suspenso
+      if (THREE.AudioContext.getContext().state === 'suspended') {
+        THREE.AudioContext.getContext().resume().then(() => {
+          console.log('AudioContext retomado com sucesso!');
+        });
+      }
+    }, { once: true }); // O { once: true } garante que o evento só rode uma vez
   </script>
 </head>
 
@@ -54,25 +65,36 @@
       <img id="negy" src="assets/negy.jpg">
       <img id="posz" src="assets/posz.jpg">
       <img id="negz" src="assets/negz.jpg">
+
+      <audio id="ambient-noise" src="assets/server_noise.mp3" loop="true" preload="auto"></audio>
     </a-assets>
 
     <a-entity cubemap="folder: ./assets/" edgeLength="3" scale="1 1 1"></a-entity>
     <a-entity position="0 0 0" rotation="0 180 0">
       <a-entity camera="far: 100; fov: 45" look-controls position="0 0 0">
         <a-cursor color="#FFF" raycaster="objects: .raycastable"></a-cursor>
-        <a-plane id="popup-info-1" position="0.4 -0.25 -1" width="0.5" height="0.25" color="#000" opacity="0.8" visible="false"
-          text="value: Servidor Rack 01\nStatus: Online\nTemperatura: 18C; align: center; color: #FFF">
+        <a-plane id="popup-info-1" position="0.4 -0.25 -1" width="0.5" height="0.25" color="#000" opacity="0.8"
+          visible="false" text="value: Servidor Rack 01\nStatus: Online\nTemperatura: 18C; align: center; color: #FFF">
 
         </a-plane>
       </a-entity>
+      <a-entity id="ambient-sound-entity"
+        sound="src: #ambient-noise; autoplay: true; loop: true; volume: 0.5"></a-entity>
     </a-entity>
-    <a-plane id="area-rack-1" class="raycastable" position="2.7 -15.67933 20" rotation="" width="1" height="2" material="opacity: 0; side: double; transparent: true; color: #FF0000" rack-area="popup: #popup-info-1" scale="16.902 35 1">
+    <a-plane id="area-rack-1" class="raycastable" position="2.7 -15.67933 20" rotation="" width="1" height="2"
+      material="opacity: 0; side: double; transparent: true; color: #FF0000" rack-area="popup: #popup-info-1"
+      scale="16.902 35 1">
     </a-plane>
-    <a-plane id="area-rack-2" class="raycastable" position="-16.64264 -14.02423 20" rotation="" width="1" height="2" material="opacity: 0; side: double; transparent: true; color: #FF0000" rack-area="popup: #popup-info-1" scale="15 31.17992 1">
+    <a-plane id="area-rack-2" class="raycastable" position="-16.64264 -14.02423 20" rotation="" width="1" height="2"
+      material="opacity: 0; side: double; transparent: true; color: #FF0000" rack-area="popup: #popup-info-1"
+      scale="15 31.17992 1">
     </a-plane>
-    <a-plane id="area-rack-3" class="raycastable" position="94.60247 4.36274 -5.19149" rotation="0 90 0" width="1" height="2" material="opacity: 0.01; side: double; transparent: true; color: #FF0000" rack-area="popup: #popup-info-1" scale="43.20385 15 1">
+    <a-plane id="area-rack-3" class="raycastable" position="94.60247 4.36274 -5.19149" rotation="0 90 0" width="1"
+      height="2" material="opacity: 0.01; side: double; transparent: true; color: #FF0000"
+      rack-area="popup: #popup-info-1" scale="43.20385 15 1">
     </a-plane>
-    <a-sphere id="ponto-interesse-1" class="raycastable" position="2 1.5 -3" radius="0.1" color="#FF0000" hotspot-interaction-1>
+    <a-sphere id="ponto-interesse-1" class="raycastable" position="2 1.5 -3" radius="0.1" color="#FF0000"
+      hotspot-interaction-1>
     </a-sphere>
 
   </a-scene>
