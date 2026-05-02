@@ -1,88 +1,81 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Tour Virtual com Hotspot</title>
-    <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
-    <script>
-      // Componente para mostrar/esconder o popup
-      AFRAME.registerComponent('hotspot-interaction-1', {
-        init: function () {
-          var el = this.el;
-          var popup = document.querySelector('#popup-info-1');
 
-          el.addEventListener('mouseenter', function () {
-            popup.setAttribute('visible', 'true');
-            el.setAttribute('color', '#00FF00'); // Muda cor do ponto ao focar
-          });
+<head>
+  <meta charset="utf-8">
+  <title>Tour Virtual com Hotspot - Racks Invisíveis</title>
+  <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+  <script src="https://unpkg.com/aframe-cubemap-component@4.0.0/index.js"></script>
 
-          el.addEventListener('mouseleave', function () {
-            popup.setAttribute('visible', 'false');
-            el.setAttribute('color', '#FF0000');
-          });
-        }
-      });
+  <script>
+    AFRAME.registerComponent('rack-area', {
+      schema: {
+        popup: { type: 'selector' } // O ID do popup que este rack controla
+      },
+      init: function () {
+        var el = this.el;
+        var popup = this.data.popup;
 
-      AFRAME.registerComponent('hotspot-interaction-2', {
-        init: function () {
-          var el = this.el;
-          var popup = document.querySelector('#popup-info-2');
+        el.addEventListener('mouseenter', function () {
+          if (popup) popup.setAttribute('visible', 'true');
+          el.setAttribute('material', 'opacity', 0.1);
+        });
 
-          el.addEventListener('mouseenter', function () {
-            popup.setAttribute('visible', 'true');
-            el.setAttribute('color', '#00FF00'); // Muda cor do ponto ao focar
-          });
+        el.addEventListener('mouseleave', function () {
+          if (popup) popup.setAttribute('visible', 'false');
+          el.setAttribute('material', 'opacity', 0);
+        });
+      }
+    });
 
-          el.addEventListener('mouseleave', function () {
-            popup.setAttribute('visible', 'false');
-            el.setAttribute('color', '#FF0000');
-          });
-        }
-      });
-    </script>
-  </head>
-  <body>
-    <a-scene>
-      <a-assets>
-        <img id="cenario-ascenty" src="ambiente_360.jpg">
-      </a-assets>
+    AFRAME.registerComponent('hotspot-interaction-1', {
+      init: function () {
+        var el = this.el;
+        var popup = document.querySelector('#popup-info-1');
+        el.addEventListener('mouseenter', function () {
+          popup.setAttribute('visible', 'true');
+          el.setAttribute('color', '#00FF00');
+        });
+        el.addEventListener('mouseleave', function () {
+          popup.setAttribute('visible', 'false');
+          el.setAttribute('color', '#FF0000');
+        });
+      }
+    });
+  </script>
+</head>
 
-      <a-sky src="#cenario-ascenty" rotation="0 -90 0"></a-sky>
+<body>
+  <a-scene>
+    <a-assets>
+      <img id="posx" src="assets/posx.jpg">
+      <img id="negx" src="assets/negx.jpg">
+      <img id="posy" src="assets/posy.jpg">
+      <img id="negy" src="assets/negy.jpg">
+      <img id="posz" src="assets/posz.jpg">
+      <img id="negz" src="assets/negz.jpg">
+    </a-assets>
 
-      <a-entity camera look-controls position="0 1.6 0">
-        <a-cursor color="#FFF"></a-cursor>
-        
-        <a-plane id="popup-info-1" 
-                 position="0 0 -1" 
-                 width="0.8" height="0.4" 
-                 color="#000" 
-                 opacity="0.8" 
-                 visible="false"
-                 text="value: Servidor Rack 04\nStatus: Online\nTemperatura: 18C; align: center; color: #FFF">
-        </a-plane>
-        <a-plane id="popup-info-2" 
-                 position="0 0 -1" 
-                 width="0.8" height="0.4" 
-                 color="#000" 
-                 opacity="0.8" 
-                 visible="false"
-                 text="value: Servidor Rack 04\nStatus: Online\nTemperatura: 18C; align: center; color: #FFF">
+    <a-entity cubemap="folder: ./assets/" edgeLength="3" scale="1 1 1"></a-entity>
+    <a-entity position="0 0 0" rotation="0 180 0">
+      <a-entity camera="far: 100; fov: 45" look-controls position="0 0 0">
+        <a-cursor color="#FFF" raycaster="objects: .raycastable"></a-cursor>
+        <a-plane id="popup-info-1" position="0.4 -0.25 -1" width="0.5" height="0.25" color="#000" opacity="0.8" visible="false"
+          text="value: Servidor Rack 01\nStatus: Online\nTemperatura: 18C; align: center; color: #FFF">
+
         </a-plane>
       </a-entity>
+    </a-entity>
+    <a-plane id="area-rack-1" class="raycastable" position="2.7 -15.67933 20" rotation="" width="1" height="2" material="opacity: 0; side: double; transparent: true; color: #FF0000" rack-area="popup: #popup-info-1" scale="16.902 35 1">
+    </a-plane>
+    <a-plane id="area-rack-2" class="raycastable" position="-16.64264 -14.02423 20" rotation="" width="1" height="2" material="opacity: 0; side: double; transparent: true; color: #FF0000" rack-area="popup: #popup-info-1" scale="15 31.17992 1">
+    </a-plane>
+    <a-plane id="area-rack-3" class="raycastable" position="94.60247 4.36274 -5.19149" rotation="0 90 0" width="1" height="2" material="opacity: 0.01; side: double; transparent: true; color: #FF0000" rack-area="popup: #popup-info-1" scale="43.20385 15 1">
+    </a-plane>
+    <a-sphere id="ponto-interesse-1" class="raycastable" position="2 1.5 -3" radius="0.1" color="#FF0000" hotspot-interaction-1>
+    </a-sphere>
 
-      <a-sphere id="ponto-interesse-1" 
-                position="2 1.5 -3" 
-                radius="0.1" 
-                color="#FF0000" 
-                hotspot-interaction-1>
-      </a-sphere>
+  </a-scene>
+</body>
 
-      <a-sphere id="ponto-interesse-2" 
-                position="-0.38125 2.87486 -3.6646" 
-                radius="0.1" color="#FF0000" 
-                hotspot-interaction-2>
-      </a-sphere>
-
-    </a-scene>
-  </body>
 </html>
