@@ -67,6 +67,8 @@
       <img id="negz" src="assets/negz.jpg">
 
       <audio id="ambient-noise" src="assets/server_noise.mp3" loop="true" preload="auto"></audio>
+
+      <img id="logo-lab" src="assets/alia-logo.png">
     </a-assets>
 
     <a-entity cubemap="folder: ./assets/" edgeLength="3" scale="1 1 1"></a-entity>
@@ -113,6 +115,11 @@
           </a-entity>
         </a-plane>
 
+        <a-plane id="popup-info-3" position="0 -0.35 -1" width="0.5" height="0.15" color="#000" opacity="0.6"
+          visible="false">
+          <a-text value="Go to Alia Laboratory" color="#FFF" align="center" width="1"></a-text>
+        </a-plane>
+
       </a-entity>
       <a-entity id="ambient-sound-entity"
         sound="src: #ambient-noise; autoplay: true; loop: true; volume: 0.5"></a-entity>
@@ -125,10 +132,14 @@
       material="opacity: 0; side: double; transparent: true; color: #FF0000" rack-area="popup: #popup-info-2"
       scale="15 31.17992 1">
     </a-plane>
-    <a-plane id="area-rack-3" class="raycastable" position="94.60247 4.36274 -5.19149" rotation="0 90 0" width="1"
-      height="2" material="opacity: 0.01; side: double; transparent: true; color: #FF0000"
-      rack-area="popup: #popup-info-3" scale="43.20385 15 1">
-    </a-plane>
+    <a-plane id="area-rack-3" class="raycastable" 
+         position="94.60247 4.36274 -5.19149" 
+         rotation="0 90 0" 
+         width="1" height="2" 
+         material="opacity: 0; side: double; transparent: true; color: #FF0000" 
+         rack-area="popup: #popup-info-3" 
+         scale="43.20385 15 1">
+</a-plane>
 
   </a-scene>
 </body>
